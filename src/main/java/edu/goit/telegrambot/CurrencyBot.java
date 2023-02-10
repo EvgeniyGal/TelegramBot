@@ -3,11 +3,13 @@ package edu.goit.telegrambot;
 import edu.goit.telegrambot.constants.BotConfig;
 import edu.goit.telegrambot.responsehandler.ResponseHandler;
 import org.telegram.abilitybots.api.bot.AbilityBot;
+import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
-import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
@@ -19,6 +21,7 @@ public class CurrencyBot extends AbilityBot {
     private final ResponseHandler responseHandler;
 
     public CurrencyBot() {
+
         this(BotConfig.BOT_TOKEN, BotConfig.BOT_USERNAME);
     }
 
@@ -29,7 +32,7 @@ public class CurrencyBot extends AbilityBot {
     }
 
     @Override
-    public int creatorId() {
+    public long creatorId() {
         return BotConfig.CREATOR_ID;
     }
 
@@ -45,7 +48,7 @@ public class CurrencyBot extends AbilityBot {
     }
 
     public Reply replyToButtons() {
-        Consumer<Update> action = upd -> responseHandler.replyToButtons(getChatId(upd), upd.getCallbackQuery().getData());
+        BiConsumer<BaseAbilityBot, Update> action = (bab, upd) -> responseHandler.replyToButtons(getChatId(upd), upd.getCallbackQuery().getData());
         return Reply.of(action, Flag.CALLBACK_QUERY);
     }
 

@@ -4,11 +4,11 @@ import java.util.Map;
 
 import edu.goit.telegrambot.constants.Constants;
 import edu.goit.telegrambot.constants.State;
-import edu.goit.telegrambot.constants.keyboardfactory.KeyboardFactory;
+import edu.goit.telegrambot.keyboardfactory.KeyboardFactory;
 import org.telegram.abilitybots.api.db.DBContext;
 import org.telegram.abilitybots.api.sender.MessageSender;
-import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 
 public class ResponseHandler {
@@ -23,17 +23,19 @@ public class ResponseHandler {
 
     public void replyToStart(long chatId) {
         try {
-            sender.execute(new SendMessage().setText(Constants.START_REPLY)
-                    .setChatId(chatId)
-                    .setReplyMarkup(KeyboardFactory.withInfoSetupButtons()));
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setText(Constants.START_REPLY);
+            sendMessage.setChatId(chatId);
+            sendMessage.setReplyMarkup(KeyboardFactory.withInfoSetupButtons());
+            sender.execute(sendMessage);
             chatStates.put(chatId, State.AWAITING_SENDINFO_OR_SETUP);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
 
-    public void replyToButtons(long chatId, String buttonId) {
-        switch (buttonId) {
+    public void replyToButtons(long chatId, String buttonName) {
+        switch (buttonName) {
             case Constants.GET_INFO_CB:
                 replyToGetInfo(chatId);
                 break;
@@ -44,9 +46,11 @@ public class ResponseHandler {
     }
 
     private void replyToGetInfo(long chatId) {
+        System.out.println("fromerepy" + chatId + "Getinfo");
     }
 
     private void replyToSetupUser(long chatId) {
+        System.out.println("fromerepy" + chatId + "SetupUser");
 
     }
 
