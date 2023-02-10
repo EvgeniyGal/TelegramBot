@@ -1,10 +1,10 @@
-package edu.goit.telegrambot.responsehandler;
+package edu.goit.telegrambot.currencubot;
 
 import java.util.Map;
 
 import edu.goit.telegrambot.constants.Constants;
 import edu.goit.telegrambot.constants.State;
-import edu.goit.telegrambot.keyboardfactory.KeyboardFactory;
+import edu.goit.telegrambot.currencubot.KeyboardFactory;
 import org.telegram.abilitybots.api.db.DBContext;
 import org.telegram.abilitybots.api.sender.MessageSender;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

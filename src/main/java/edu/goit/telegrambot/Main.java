@@ -1,5 +1,6 @@
 package edu.goit.telegrambot;
 
+import edu.goit.telegrambot.currencubot.CurrencyBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;

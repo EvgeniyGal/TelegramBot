@@ -1,7 +1,6 @@
-package edu.goit.telegrambot;
+package edu.goit.telegrambot.currencubot;
 
 import edu.goit.telegrambot.constants.BotConfig;
-import edu.goit.telegrambot.responsehandler.ResponseHandler;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;

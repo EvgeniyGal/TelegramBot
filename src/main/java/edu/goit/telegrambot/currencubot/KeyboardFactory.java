@@ -1,4 +1,4 @@
-package edu.goit.telegrambot.keyboardfactory;
+package edu.goit.telegrambot.currencubot;
 
 import edu.goit.telegrambot.constants.Constants;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
