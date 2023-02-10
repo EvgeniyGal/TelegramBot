@@ -1,6 +1,7 @@
 package edu.goit.telegrambot;
 
 import edu.goit.telegrambot.constant.BotConfig;
+import edu.goit.telegrambot.constant.Constants;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 
@@ -10,7 +11,7 @@ import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 public class CurrencyBot extends AbilityBot {
 
     protected CurrencyBot() {
-        super(BotConfig.BOT_TOKEN, BotConfig.BOT_USERNAME);
+        this(BotConfig.BOT_TOKEN, BotConfig.BOT_USERNAME);
     }
 
     protected CurrencyBot(String botToken, String botUsername) {
@@ -22,26 +23,18 @@ public class CurrencyBot extends AbilityBot {
         return BotConfig.CREATOR_ID;
     }
 
-    public Ability sayHelloWorld() {
+    public Ability commandStart() {
         return Ability
                 .builder()
-                .name("hello")
-                .info("says hello world!")
+                .name("start")
+                .info("start greeting")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("Hello world!", ctx.chatId()))
+                .action(ctx -> silent.send(Constants.START_GREETING, ctx.chatId()))
                 .build();
     }
 
-    public Ability command1() {
-        return Ability
-                .builder()
-                .name("command1")
-                .info("says hello world!")
-                .locality(ALL)
-                .privacy(PUBLIC)
-                .action(ctx -> silent.send("Hello from command1!!!!!", ctx.chatId()))
-                .build();
-    }
+
+
 
 }
