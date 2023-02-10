@@ -10,11 +10,11 @@ import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
+import static org.telegram.abilitybots.api.util.AbilityUtils.getUser;
 
 public class CurrencyBot extends AbilityBot {
 
@@ -48,7 +48,8 @@ public class CurrencyBot extends AbilityBot {
     }
 
     public Reply replyToButtons() {
-        BiConsumer<BaseAbilityBot, Update> action = (bab, upd) -> responseHandler.replyToButtons(getChatId(upd), upd.getCallbackQuery().getData());
+        BiConsumer<BaseAbilityBot, Update> action = (bab, upd) -> responseHandler.replyToButtons(getUser(upd),
+                getChatId(upd), upd.getCallbackQuery().getData());
         return Reply.of(action, Flag.CALLBACK_QUERY);
     }
 
