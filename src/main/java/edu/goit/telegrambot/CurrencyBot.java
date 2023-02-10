@@ -1,6 +1,6 @@
 package edu.goit.telegrambot;
 
-import edu.goit.telegrambot.constant.Constants;
+import edu.goit.telegrambot.constant.BotConfig;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 
@@ -10,7 +10,7 @@ import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 public class CurrencyBot extends AbilityBot {
 
     protected CurrencyBot() {
-        super(Constants.BOT_TOKEN, Constants.BOT_USERNAME);
+        super(BotConfig.BOT_TOKEN, BotConfig.BOT_USERNAME);
     }
 
     protected CurrencyBot(String botToken, String botUsername) {
@@ -19,7 +19,7 @@ public class CurrencyBot extends AbilityBot {
 
     @Override
     public long creatorId() {
-        return Constants.CREATOR_ID;
+        return BotConfig.CREATOR_ID;
     }
 
     public Ability sayHelloWorld() {
