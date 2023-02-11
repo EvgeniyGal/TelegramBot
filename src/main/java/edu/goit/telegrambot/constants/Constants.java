@@ -3,6 +3,8 @@ package edu.goit.telegrambot.constants;
 public interface Constants {
     String START_REPLY = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют.";
     String CHAT_STATES = "CHAT_STATES";
+    String CHECK_SIGN = "✅";
+
 
 
 
@@ -34,6 +36,16 @@ public interface Constants {
     String SET_CURRENCY_USD_CB = "SetUSD";
     String SET_CURRENCY_EUR_CB = "SetERO";
     String SET_TIME_9_CB = "Set9";
+    String SET_TIME_10_CB = "Set10";
+    String SET_TIME_11_CB = "Set11";
+    String SET_TIME_12_CB = "Set12";
+    String SET_TIME_13_CB = "Set13";
+    String SET_TIME_14_CB = "Set14";
+    String SET_TIME_15_CB = "Set15";
+    String SET_TIME_16_CB = "Set16";
+    String SET_TIME_17_CB = "Set17";
+    String SET_TIME_18_CB = "Set18";
+    String SET_TIME_STOP_CB = "Stop";
 
 
 }
