@@ -4,7 +4,6 @@ import java.util.Map;
 
 import edu.goit.telegrambot.constants.Constants;
 import edu.goit.telegrambot.constants.State;
-import edu.goit.telegrambot.currencubot.KeyboardFactory;
 import org.telegram.abilitybots.api.db.DBContext;
 import org.telegram.abilitybots.api.sender.MessageSender;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -68,7 +67,7 @@ public class ResponseHandler {
                     "\n chat ID" + chatId);
             sendMessage.setChatId(chatId);
             sender.execute(sendMessage);
-            chatStates.put(chatId, State.AWAITING_FO_SETUPCOMMAND);
+            chatStates.put(chatId, State.AWAITING_FOR_SETUPCOMMAND);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
