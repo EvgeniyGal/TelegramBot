@@ -65,13 +65,13 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineThird = new ArrayList<>();
         InlineKeyboardButton setTwo = new InlineKeyboardButton();
-        setTwo.setText(cbUser.getTolerance() == 2 ? Constants.CHECK_SIGN + "" : "2");
+        setTwo.setText(cbUser.getTolerance() == 2 ? Constants.CHECK_SIGN + "2" : "2");
         setTwo.setCallbackData(Constants.SET_TWO_CB);
         InlineKeyboardButton setThree = new InlineKeyboardButton();
         setThree.setText(cbUser.getTolerance() == 3 ? Constants.CHECK_SIGN + "3" : "3");
         setThree.setCallbackData(Constants.SET_THREE_CB);
         InlineKeyboardButton setFour = new InlineKeyboardButton();
-        setFour.setText(cbUser.getTolerance() == 2 ? Constants.CHECK_SIGN + "4" : "4");
+        setFour.setText(cbUser.getTolerance() == 4 ? Constants.CHECK_SIGN + "4" : "4");
         setFour.setCallbackData(Constants.SET_FOUR_CB);
         rowInlineFirst.add(setTwo);
         rowInlineSecond.add(setThree);
@@ -166,8 +166,8 @@ public class KeyboardFactory {
         set18.setText(cbUser.getSendTime() == 18 ? Constants.CHECK_SIGN + "18" : "18");
         set18.setCallbackData(Constants.SET_TIME_18_CB);
         InlineKeyboardButton setStop = new InlineKeyboardButton();
-        set18.setText(cbUser.getSendTime() == -1 ? Constants.CHECK_SIGN + "Відключити сповіщення" : "Відключити сповіщення");
-        set18.setCallbackData(Constants.SET_TIME_STOP_CB);
+        setStop.setText(cbUser.getSendTime() == -1 ? Constants.CHECK_SIGN + "Відключити сповіщення" : "Відключити сповіщення");
+        setStop.setCallbackData(Constants.SET_TIME_STOP_CB);
 
         rowInlineFirst.add(set9);
         rowInlineFirst.add(set10);
@@ -188,9 +188,9 @@ public class KeyboardFactory {
         rowsInline.add(rowInlineSecond);
         rowsInline.add(rowInlineThird);
         rowsInline.add(rowInlineFourth);
+
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
-
 
 }

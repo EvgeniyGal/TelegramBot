@@ -2,7 +2,6 @@ package edu.goit.telegrambot.constants;
 
 public interface Constants {
     String START_REPLY = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют.";
-    String CHAT_STATES = "CHAT_STATES";
     String CHECK_SIGN = "✅";
 
 
@@ -48,4 +47,9 @@ public interface Constants {
     String SET_TIME_STOP_CB = "Stop";
 
 
+    String TIME_SETUP_MESSAGE = "Виберіть час сповіщення";
+    String CURRENCY_SETUP_MESSAGE = "Виберіть валюти, що вас цікавлять";
+    String TOLERANCE_SETUP_MESSAGE = "Виберіть кількість знаків після коми";
+    String BANK_SETUP_MESSAGE = "Виберіть банки, що вас цікавлять";
+    String SETUP_USER_MESSAGE = "Налаштування";
 }

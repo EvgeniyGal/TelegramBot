@@ -27,7 +27,7 @@ public class CurrencyBot extends AbilityBot {
     public CurrencyBot(String botToken, String botUsername) {
 
         super(botToken, botUsername);
-        responseHandler = new ResponseHandler(sender, db);
+        responseHandler = new ResponseHandler(sender);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class CurrencyBot extends AbilityBot {
                 .build();
     }
 
+
     public Reply replyToButtons() {
         BiConsumer<BaseAbilityBot, Update> action = (bab, upd) -> responseHandler.replyToButtons(getUser(upd),
                 getChatId(upd), upd.getCallbackQuery().getData());
         return Reply.of(action, Flag.CALLBACK_QUERY);
     }
-
 
 }
