@@ -166,7 +166,7 @@ public class KeyboardFactory {
         set18.setText(cbUser.getSendTime() == 18 ? Constants.CHECK_SIGN + "18" : "18");
         set18.setCallbackData(Constants.SET_TIME_18_CB);
         InlineKeyboardButton setStop = new InlineKeyboardButton();
-        setStop.setText(cbUser.getSendTime() == 18 ? Constants.CHECK_SIGN + "Відключити сповіщення" : "Відключити сповіщення");
+        setStop.setText(cbUser.getSendTime() == -1 ? Constants.CHECK_SIGN + "Відключити сповіщення" : "Відключити сповіщення");
         setStop.setCallbackData(Constants.SET_TIME_STOP_CB);
 
         rowInlineFirst.add(set9);
@@ -181,7 +181,6 @@ public class KeyboardFactory {
         rowInlineThird.add(set16);
         rowInlineThird.add(set17);
 
-
         rowInlineFourth.add(set18);
         rowInlineFourth.add(setStop);
 
@@ -193,6 +192,5 @@ public class KeyboardFactory {
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
-
 
 }

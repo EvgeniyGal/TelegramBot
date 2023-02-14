@@ -4,6 +4,7 @@ import edu.goit.telegrambot.Main;
 import edu.goit.telegrambot.bank.Banks;
 import edu.goit.telegrambot.cbuser.CBUser;
 import edu.goit.telegrambot.constants.Constants;
+import edu.goit.telegrambot.currency.CurrencyType;
 import org.telegram.abilitybots.api.sender.MessageSender;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
@@ -66,6 +67,10 @@ public class ResponseHandler {
                 Main.cbUsers.get(user.getId()).setTolerance((byte) 3);
                 replyToSetupTolerance(user, chatId);
                 break;
+            case Constants.SET_FOUR_CB:
+                Main.cbUsers.get(user.getId()).setTolerance((byte) 4);
+                replyToSetupTolerance(user, chatId);
+                break;
             case Constants.SET_BANK_MONO_CB:
                 List<Banks> banks = Main.cbUsers.get(user.getId()).getBanks();
                 if (banks.contains(Banks.MONOBANK)) {
@@ -92,6 +97,68 @@ public class ResponseHandler {
                     banks.add(Banks.NBUBANK);
                 }
                 replyToSetupBank(user, chatId);
+                break;
+            case Constants.SET_CURRENCY_USD_CB:
+                List<CurrencyType> currencyTypes = Main.cbUsers.get(user.getId()).getCurType();
+                if (currencyTypes.contains(CurrencyType.USD)) {
+                    currencyTypes.remove(CurrencyType.USD);
+                } else {
+                    currencyTypes.add(CurrencyType.USD);
+                }
+                replyToSetupCurrency(user, chatId);
+                break;
+            case Constants.SET_CURRENCY_EUR_CB:
+                currencyTypes = Main.cbUsers.get(user.getId()).getCurType();
+                if (currencyTypes.contains(CurrencyType.EUR)) {
+                    currencyTypes.remove(CurrencyType.EUR);
+                } else {
+                    currencyTypes.add(CurrencyType.EUR);
+                }
+                replyToSetupCurrency(user, chatId);
+                break;
+            case Constants.SET_TIME_9_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 9);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_10_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 10);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_11_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 11);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_12_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 12);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_13_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 13);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_14_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 14);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_15_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 15);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_16_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 16);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_17_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 17);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_18_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) 18);
+                replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_TIME_STOP_CB:
+                Main.cbUsers.get(user.getId()).setSendTime((byte) -1);
+                replyToSetupTime(user, chatId);
                 break;
         }
     }
