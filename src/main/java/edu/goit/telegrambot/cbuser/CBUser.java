@@ -37,10 +37,6 @@ public class CBUser {
         this.sendTime = sendTime;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public long getChatID() {
         return chatID;
     }
@@ -59,5 +55,23 @@ public class CBUser {
 
     public byte getSendTime() {
         return sendTime;
+    }
+
+    public void sendInfo() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Banks bank : banks) {
+
+            for (CurrencyType currency : curType) {
+//TODO
+//                stringBuilder.append(bank.getBank().);
+
+            }
+
+
+        }
+
+
     }
 }
