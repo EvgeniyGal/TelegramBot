@@ -28,4 +28,8 @@ public class Currency {
     public void setBuyRate(BigDecimal buyRate) {
         this.buyRate = buyRate;
     }
+
+    public CurrencyType getType() {
+        return type;
+    }
 }
