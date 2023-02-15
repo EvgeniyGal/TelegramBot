@@ -6,8 +6,10 @@ public enum Banks {
     PRIVATBANK(PrivatBank.getInstance()),
     NBUBANK(NBUBank.getInstance());
 
-    Banks(Bank Bank) {
+    private final Bank bank;
 
+    Banks(Bank bank) {
+        this.bank = bank;
     }
 
 }
