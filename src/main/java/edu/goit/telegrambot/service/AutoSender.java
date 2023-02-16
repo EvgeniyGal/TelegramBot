@@ -8,7 +8,9 @@ import java.util.*;
 
 public class AutoSender {
 
-    public static void main(String[] args) {
+    public static void startAutoSender() {
+
+        System.out.println("Enter to start");
 
         Timer timer = new Timer();
 
@@ -16,12 +18,12 @@ public class AutoSender {
 
         Calendar startTime = Calendar.getInstance();
         startTime.setTime(currentDate);
-        startTime.set(Calendar.HOUR_OF_DAY, 9 + 1);
+        startTime.set(Calendar.HOUR_OF_DAY, 0);
         startTime.set(Calendar.MINUTE, 0);
         startTime.set(Calendar.SECOND, 0);
         startTime.set(Calendar.MILLISECOND, 0);
 
-        timer.schedule(new MyTask(), startTime.getTime(), 60 * 60 * 1000);
+        timer.schedule(new MyTask(), startTime.getTime(), 2 * 1000);
 
     }
 
@@ -32,7 +34,7 @@ public class AutoSender {
             Date currentDate = new Date();
             Calendar startTime = Calendar.getInstance();
             startTime.setTime(currentDate);
-            int currentHour = startTime.get(Calendar.HOUR_OF_DAY);
+            int currentHour = startTime.get(Calendar.SECOND);
 
             if (currentHour >= 9 && currentHour <= 18) {
                 sendMessage(currentHour);
@@ -44,7 +46,8 @@ public class AutoSender {
 
             for (Map.Entry<Long, CBUser> entry : Main.cbUsers.entrySet()) {
                 if (entry.getValue().getSendTime() == currentHour) {
-                    CurrencyBot.getResponseHandler().replyToGetInfo(entry.getValue().getMessage(), entry.getValue().getChatID());
+                    CurrencyBot.getResponseHandler().replyToGetInfo(entry.getValue().getMessage(),
+                            entry.getValue().getChatID());
                 }
             }
 
