@@ -22,7 +22,7 @@ public class NBUBank extends Bank {
     }
 
     @Override
-    void updateRate() {
+    public void updateRate() {
 
     }
 }
