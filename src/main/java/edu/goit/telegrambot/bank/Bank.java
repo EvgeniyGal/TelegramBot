@@ -11,7 +11,7 @@ public abstract class Bank {
     String name;
     List<Currency> currencies;
 
-    abstract void updateRate();
+    abstract public void updateRate();
 
     public String getCurrencyRate(CurrencyType curType, byte tolerance) {
 

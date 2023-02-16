@@ -22,7 +22,7 @@ public class PrivatBank extends Bank {
 
 
     @Override
-    void updateRate() {
+    public void updateRate() {
 
     }
 }

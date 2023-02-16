@@ -35,7 +35,7 @@ public class MonoBank extends Bank {
     }
 
     @Override
-    void updateRate() {
+    public void updateRate() {
         for (Currency cur : currencies) {
             cur.setBuyRate(updateBuyRate(cur.getType()));
             cur.setSellRate(updateSellRate(cur.getType()));

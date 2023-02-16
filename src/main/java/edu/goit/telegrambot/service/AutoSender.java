@@ -5,36 +5,27 @@ import edu.goit.telegrambot.cbuser.CBUser;
 import edu.goit.telegrambot.currencubot.CurrencyBot;
 
 import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class AutoSender {
 
     public static void startAutoSender() {
 
-        System.out.println("Enter to start");
-
-        Timer timer = new Timer();
-
-        Date currentDate = new Date();
-
-        Calendar startTime = Calendar.getInstance();
-        startTime.setTime(currentDate);
-        startTime.set(Calendar.HOUR_OF_DAY, 0);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.SECOND, 0);
-        startTime.set(Calendar.MILLISECOND, 0);
-
-        timer.schedule(new MyTask(), startTime.getTime(), 2 * 1000);
+        ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
+        scheduledExecutorService.scheduleWithFixedDelay(new SendTask(), 0,1, TimeUnit.HOURS);
 
     }
 
-    private static class MyTask extends TimerTask {
+    private static class SendTask implements Runnable {
 
         public void run() {
 
             Date currentDate = new Date();
-            Calendar startTime = Calendar.getInstance();
-            startTime.setTime(currentDate);
-            int currentHour = startTime.get(Calendar.SECOND);
+            Calendar currentTime = Calendar.getInstance();
+            currentTime.setTime(currentDate);
+            int currentHour = currentTime.get(Calendar.HOUR);
 
             if (currentHour >= 9 && currentHour <= 18) {
                 sendMessage(currentHour);
@@ -43,14 +34,12 @@ public class AutoSender {
         }
 
         private void sendMessage(int currentHour) {
-
             for (Map.Entry<Long, CBUser> entry : Main.cbUsers.entrySet()) {
                 if (entry.getValue().getSendTime() == currentHour) {
                     CurrencyBot.getResponseHandler().replyToGetInfo(entry.getValue().getMessage(),
                             entry.getValue().getChatID());
                 }
             }
-
         }
     }
 
