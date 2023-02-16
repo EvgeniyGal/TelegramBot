@@ -21,20 +21,6 @@ public class AutoRateUpdate{
         }
     }
 
-    /*
-    Ще один варіант у такий спосіб
-    AutoRateUpdate() {
-        ScheduledExecutorService scheduler
-                = Executors.newSingleThreadScheduledExecutor();
-        Runnable task = new Runnable() {
-            public void run() {
-                update();
-            }
-        };
-        int delay = 5;
-        scheduler.schedule(task, delay, MINUTES);
-    }
-     */
     private static void update(){
         for (Banks value : Banks.values()) {
             value.name();

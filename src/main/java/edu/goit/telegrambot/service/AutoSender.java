@@ -2,6 +2,7 @@ package edu.goit.telegrambot.service;
 
 import edu.goit.telegrambot.Main;
 import edu.goit.telegrambot.cbuser.CBUser;
+import edu.goit.telegrambot.currencubot.CurrencyBot;
 
 import java.util.*;
 
@@ -20,7 +21,7 @@ public class AutoSender {
         startTime.set(Calendar.SECOND, 0);
         startTime.set(Calendar.MILLISECOND, 0);
 
-        timer.schedule(new MyTask(), startTime.getTime(), +60 * 60 * 1000);
+        timer.schedule(new MyTask(), startTime.getTime(), 60 * 60 * 1000);
 
     }
 
@@ -43,7 +44,7 @@ public class AutoSender {
 
             for (Map.Entry<Long, CBUser> entry : Main.cbUsers.entrySet()) {
                 if (entry.getValue().getSendTime() == currentHour) {
-                    entry.getValue().sendInfo();
+                    CurrencyBot.getResponseHandler().replyToGetInfo(entry.getValue().getMessage(), entry.getValue().getChatID());
                 }
             }
 

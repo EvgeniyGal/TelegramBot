@@ -15,11 +15,11 @@ import java.util.List;
 public class MonoBank extends Bank {
 
     private static final String URL = "https://api.monobank.ua/bank/currency";
-    private static final MonoBank monoBank = new MonoBank("МоноБанк", new ArrayList<>());
+    private static final MonoBank monoBank = new MonoBank();
 
-    private MonoBank(String name, List<Currency> currencies) {
-        this.name = name;
-        this.currencies = currencies;
+    private MonoBank() {
+        this.name = "МоноБанк";
+        this.currencies = new ArrayList<>();
         currencies.add(new Currency(CurrencyType.USD, BigDecimal.ZERO, BigDecimal.ZERO));
         currencies.add(new Currency(CurrencyType.EUR, BigDecimal.ZERO, BigDecimal.ZERO));
     }
