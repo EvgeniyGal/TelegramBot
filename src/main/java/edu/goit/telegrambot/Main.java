@@ -16,11 +16,9 @@ public class Main {
 
     public static void main(String[] args) throws TelegramApiException {
 
-        // Create the TelegramBotsApi object to register your bots
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 
         try {
-            // Register your newly created AbilityBot
             CurrencyBot bot = new CurrencyBot();
             botsApi.registerBot(bot);
 

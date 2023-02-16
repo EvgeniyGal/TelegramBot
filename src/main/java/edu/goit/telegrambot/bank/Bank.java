@@ -2,7 +2,6 @@ package edu.goit.telegrambot.bank;
 
 import edu.goit.telegrambot.currency.Currency;
 import edu.goit.telegrambot.currency.CurrencyType;
-import java.math.RoundingMode;
 import java.util.List;
 
 public abstract class Bank {
@@ -28,5 +27,4 @@ public abstract class Bank {
     public String getName() {
         return name;
     }
-
 }

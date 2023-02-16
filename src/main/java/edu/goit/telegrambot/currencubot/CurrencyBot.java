@@ -17,7 +17,7 @@ import static org.telegram.abilitybots.api.util.AbilityUtils.getUser;
 
 public class CurrencyBot extends AbilityBot {
 
-    private final ResponseHandler responseHandler;
+    private static ResponseHandler responseHandler;
 
     public CurrencyBot() {
 
@@ -53,4 +53,7 @@ public class CurrencyBot extends AbilityBot {
         return Reply.of(action, Flag.CALLBACK_QUERY);
     }
 
+    public static ResponseHandler getResponseHandler() {
+        return responseHandler;
+    }
 }

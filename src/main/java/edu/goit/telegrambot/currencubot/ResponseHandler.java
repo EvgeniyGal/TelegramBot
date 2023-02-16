@@ -42,7 +42,7 @@ public class ResponseHandler {
 
         switch (buttonName) {
             case Constants.GET_INFO_CB:
-                replyToGetInfo(user, chatId);
+                replyToGetInfo(Main.cbUsers.get(user.getId()).getMessage(), chatId);
                 break;
             case Constants.SETUP_USER_CB:
                 replyToSetupUser(chatId);
@@ -163,10 +163,10 @@ public class ResponseHandler {
         }
     }
 
-    public void replyToGetInfo(User user, long chatId) {
+    public void replyToGetInfo(String message, long chatId) {
         try {
             SendMessage sendMessage = new SendMessage();
-            sendMessage.setText("\uD83D\uDD25" + user.getFirstName() + ", Скоро тут будуть курси валют \uD83D\uDD25");
+            sendMessage.setText(message);
             sendMessage.setChatId(chatId);
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
