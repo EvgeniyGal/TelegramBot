@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CBUser {
-    private long id;
+    private final long id;
     private long chatID;
     private List<Banks> banks;
     private byte tolerance;
@@ -37,10 +37,6 @@ public class CBUser {
         this.sendTime = sendTime;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public long getChatID() {
         return chatID;
     }
@@ -59,5 +55,20 @@ public class CBUser {
 
     public byte getSendTime() {
         return sendTime;
+    }
+
+    public String getMessage() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Banks bank : banks) {
+            stringBuilder.append(bank.getBank().getName()).append("\n");
+            for (CurrencyType currency : curType) {
+                stringBuilder.append(bank.getBank().getCurrencyRate(currency, tolerance)).append("\n");
+            }
+        }
+
+        return stringBuilder.toString();
+
     }
 }
