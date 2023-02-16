@@ -6,10 +6,15 @@ public enum Banks {
     PRIVATBANK(PrivatBank.getInstance()),
     NBUBANK(NBUBank.getInstance());
 
+
     private final Bank bank;
+
 
     Banks(Bank bank) {
         this.bank = bank;
     }
 
+    public Bank getBank() {
+        return bank;
+    }
 }
