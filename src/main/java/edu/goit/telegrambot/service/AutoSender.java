@@ -13,8 +13,13 @@ public class AutoSender {
 
     public static void startAutoSender() {
 
+        Date currentDate = new Date();
+        Calendar currentTime = Calendar.getInstance();
+        currentTime.setTime(currentDate);
+
         ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
-        scheduledExecutorService.scheduleWithFixedDelay(new SendTask(), 0,1, TimeUnit.HOURS);
+        scheduledExecutorService.scheduleWithFixedDelay(new SendTask(),
+                60 - currentTime.get(Calendar.MINUTE), 60, TimeUnit.MINUTES);
 
     }
 
