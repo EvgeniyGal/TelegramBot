@@ -14,7 +14,7 @@ public abstract class Bank {
     abstract public void updateRate();
 
     public String getCurrencyRate(CurrencyType curType, byte tolerance) {
-        return String.format("Курс валют в %s: %s/%s\n", name, curType.name(), "UAH") +
+        return String.format("Курс валют %s/%s:\n", curType.name(), CurrencyType.UAH) +
                 "Купівля: " + currencies.stream()
                 .filter(item -> item.getType().equals(curType))
                 .map(it -> it.getBuyRate().setScale(tolerance, RoundingMode.HALF_UP))

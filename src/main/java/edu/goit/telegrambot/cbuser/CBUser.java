@@ -66,6 +66,7 @@ public class CBUser {
             for (CurrencyType currency : curType) {
                 stringBuilder.append(bank.getBank().getCurrencyRate(currency, tolerance)).append("\n");
             }
+            stringBuilder.append("\n");
         }
 
         return stringBuilder.toString();
