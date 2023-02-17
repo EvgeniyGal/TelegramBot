@@ -2,6 +2,7 @@ package edu.goit.telegrambot;
 
 import edu.goit.telegrambot.cbuser.CBUser;
 import edu.goit.telegrambot.currencubot.CurrencyBot;
+import edu.goit.telegrambot.service.AutoRateUpdate;
 import edu.goit.telegrambot.service.AutoSender;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -19,6 +20,8 @@ public class Main {
 
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         AutoSender.startAutoSender();
+        Thread thread = new Thread(AutoRateUpdate::update);
+        thread.start();
 
         try {
             CurrencyBot bot = new CurrencyBot();
