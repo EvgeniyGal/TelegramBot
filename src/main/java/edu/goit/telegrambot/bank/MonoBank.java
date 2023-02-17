@@ -16,6 +16,7 @@ public class MonoBank extends Bank {
 
     private static final String URL = "https://api.monobank.ua/bank/currency";
     private static final MonoBank monoBank = new MonoBank();
+    private String response;
 
     private MonoBank() {
         this.name = "МоноБанк";
@@ -37,13 +38,14 @@ public class MonoBank extends Bank {
 
     @Override
     public void updateRate() {
+        response = respBody();
         for (Currency cur : currencies) {
             cur.setBuyRate(updateBuyRate(cur.getType()));
             cur.setSellRate(updateSellRate(cur.getType()));
         }
     }
 
-    String respBody() {
+    private String respBody() {
         try {
             return Jsoup.connect(URL)
                     .ignoreContentType(true)
@@ -51,29 +53,39 @@ public class MonoBank extends Bank {
                     .body()
                     .text();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return "Too many requests";
         }
     }
 
-    BigDecimal updateBuyRate(CurrencyType currenType) {
-        List<MonoItem> monoItems = new Gson().fromJson(respBody(), new TypeToken<List<MonoItem>>() {
-        }.getType());
-        double result = monoItems.stream()
-                .filter(item -> item.getCurrencyCodeA() == java.util.Currency.getInstance(currenType.name()).getNumericCode())
-                .map(MonoItem::getRateBuy)
-                .findFirst()
-                .orElseThrow();
-        return new BigDecimal(result);
+    private BigDecimal updateBuyRate(CurrencyType currenType) {
+        if (response.equals("Too many requests")) {
+            return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
+        } else {
+            List<MonoItem> monoItems = new Gson().fromJson(response, new TypeToken<List<MonoItem>>() {
+            }.getType());
+            double result = monoItems.stream()
+                    .filter(item -> item.getCurrencyCodeA() == java.util.Currency.getInstance(currenType.name()).getNumericCode())
+                    .filter(item -> item.getCurrencyCodeB() == java.util.Currency.getInstance(CurrencyType.UAH.name()).getNumericCode())
+                    .map(MonoItem::getRateBuy)
+                    .findFirst()
+                    .orElseThrow();
+            return new BigDecimal(result);
+        }
     }
 
-    BigDecimal updateSellRate(CurrencyType currenType) {
-        List<MonoItem> monoItems = new Gson().fromJson(respBody(), new TypeToken<List<MonoItem>>() {
-        }.getType());
-        double result = monoItems.stream()
-                .filter(item -> item.getCurrencyCodeA() == java.util.Currency.getInstance(currenType.name()).getNumericCode())
-                .map(MonoItem::getRateSell)
-                .findFirst()
-                .orElseThrow();
-        return new BigDecimal(result);
+    private BigDecimal updateSellRate(CurrencyType currenType) {
+        if (response.equals("Too many requests")) {
+            return currencies.stream().map(Currency::getSellRate).findFirst().orElseThrow();
+        } else {
+            List<MonoItem> monoItems = new Gson().fromJson(response, new TypeToken<List<MonoItem>>() {
+            }.getType());
+            double result = monoItems.stream()
+                    .filter(item -> item.getCurrencyCodeA() == java.util.Currency.getInstance(currenType.name()).getNumericCode())
+                    .filter(item -> item.getCurrencyCodeB() == java.util.Currency.getInstance(CurrencyType.UAH.name()).getNumericCode())
+                    .map(MonoItem::getRateSell)
+                    .findFirst()
+                    .orElseThrow();
+            return new BigDecimal(result);
+        }
     }
 }
