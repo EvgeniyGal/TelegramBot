@@ -63,15 +63,15 @@ public class CBUser {
     public String getMessage() {
 
         StringBuilder stringBuilder = new StringBuilder();
-
+        stringBuilder.append(Constants.UA_FLAG)
+                .append(" Доброго дня ")
+                .append(Constants.UA_FLAG)
+                .append("\n")
+                .append("Курс валют на ")
+                .append(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyyр.")))
+                .append("\n\n");
         for (Banks bank : banks) {
-            stringBuilder.append(Constants.UA_FLAG)
-                    .append(" Доброго дня ")
-                    .append(Constants.UA_FLAG)
-                    .append("\n")
-                    .append("Курс валют на ")
-                    .append(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyyр.")))
-                    .append("\n в ")
+            stringBuilder.append("в ")
                     .append(bank.getBank().getName()).append("\n");
             for (CurrencyType currency : curType) {
                 stringBuilder.append(bank.getBank().getCurrencyRate(currency, tolerance)).append("\n");
