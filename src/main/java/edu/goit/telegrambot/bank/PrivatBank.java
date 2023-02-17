@@ -12,7 +12,7 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 import java.util.List;
 
-public class PrivatBank extends Bank {
+public class PrivatBank extends Bank{
 
     private static final String URL = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5";
     private static final PrivatBank privatBank = new PrivatBank();
