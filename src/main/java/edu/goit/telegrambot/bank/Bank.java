@@ -1,6 +1,6 @@
 package edu.goit.telegrambot.bank;
 
-import edu.goit.telegrambot.constants.Emoji;
+import edu.goit.telegrambot.constants.Constants;
 import edu.goit.telegrambot.currency.Currency;
 import edu.goit.telegrambot.currency.CurrencyType;
 
@@ -17,9 +17,9 @@ public abstract class Bank {
     public String getCurrencyRate(CurrencyType curType, byte tolerance) {
         StringBuilder builder = new StringBuilder();
         if (curType.equals(CurrencyType.USD)) {
-            builder.append(Emoji.USA.getField()).append(curType.name()).append(": ");
+            builder.append(Constants.USA_FLAG).append(curType.name()).append(": ");
         } else {
-            builder.append(Emoji.EU.getField()).append(curType.name()).append(": ");
+            builder.append(Constants.EU_FLAG).append(curType.name()).append(": ");
         }
         builder.append(currencies.stream()
                         .filter(item -> item.getType().equals(curType))
