@@ -1,8 +1,11 @@
 package edu.goit.telegrambot.cbuser;
 
 import edu.goit.telegrambot.bank.Banks;
+import edu.goit.telegrambot.constants.Emoji;
 import edu.goit.telegrambot.currency.CurrencyType;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +65,14 @@ public class CBUser {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Banks bank : banks) {
-            stringBuilder.append(bank.getBank().getName()).append("\n");
+            stringBuilder.append(Emoji.UA.getField())
+                    .append(" Доброго дня ")
+                    .append(Emoji.UA.getField())
+                    .append("\n")
+                    .append("Курс валют на ")
+                    .append(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyyр.")))
+                    .append("\n в ")
+                    .append(bank.getBank().getName()).append("\n");
             for (CurrencyType currency : curType) {
                 stringBuilder.append(bank.getBank().getCurrencyRate(currency, tolerance)).append("\n");
             }

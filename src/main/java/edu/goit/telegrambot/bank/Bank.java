@@ -1,5 +1,6 @@
 package edu.goit.telegrambot.bank;
 
+import edu.goit.telegrambot.constants.Emoji;
 import edu.goit.telegrambot.currency.Currency;
 import edu.goit.telegrambot.currency.CurrencyType;
 
@@ -14,16 +15,23 @@ public abstract class Bank {
     abstract public void updateRate();
 
     public String getCurrencyRate(CurrencyType curType, byte tolerance) {
-        return String.format("Курс валют %s/%s:\n", curType.name(), CurrencyType.UAH) +
-                "Купівля: " + currencies.stream()
-                .filter(item -> item.getType().equals(curType))
-                .map(it -> it.getBuyRate().setScale(tolerance, RoundingMode.HALF_UP))
-                .findFirst().orElseThrow() +
-                "\nПродаж: " + currencies.stream()
-                .filter(item -> item.getType().equals(curType))
-                .map(it -> it.getSellRate().setScale(tolerance, RoundingMode.HALF_UP))
-                .findFirst()
-                .orElseThrow();
+        StringBuilder builder = new StringBuilder();
+        if (curType.equals(CurrencyType.USD)) {
+            builder.append(Emoji.USA.getField()).append(curType.name()).append(": ");
+        } else {
+            builder.append(Emoji.EU.getField()).append(curType.name()).append(": ");
+        }
+        builder.append(currencies.stream()
+                        .filter(item -> item.getType().equals(curType))
+                        .map(it -> it.getBuyRate().setScale(tolerance, RoundingMode.HALF_UP))
+                        .findFirst().orElseThrow())
+                .append(" - ")
+                .append(currencies.stream()
+                        .filter(item -> item.getType().equals(curType))
+                        .map(it -> it.getSellRate().setScale(tolerance, RoundingMode.HALF_UP))
+                        .findFirst()
+                        .orElseThrow());
+        return builder.toString();
     }
 
     public String getName() {
