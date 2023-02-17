@@ -22,6 +22,7 @@ public class MonoBank extends Bank {
         this.currencies = new ArrayList<>();
         currencies.add(new Currency(CurrencyType.USD, BigDecimal.ZERO, BigDecimal.ZERO));
         currencies.add(new Currency(CurrencyType.EUR, BigDecimal.ZERO, BigDecimal.ZERO));
+        updateRate();
     }
 
     public static Bank getInstance() {
