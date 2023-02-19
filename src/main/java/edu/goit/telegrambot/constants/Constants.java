@@ -1,6 +1,8 @@
 package edu.goit.telegrambot.constants;
 
 public interface Constants {
+
+
     String START_REPLY = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют.";
     String CHECK_SIGN = "✅";
 
