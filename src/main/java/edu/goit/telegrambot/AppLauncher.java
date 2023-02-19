@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-public class Main {
+public class AppLauncher {
 
     public static final Map<Long, CBUser> cbUsers = new ConcurrentHashMap<>();
 

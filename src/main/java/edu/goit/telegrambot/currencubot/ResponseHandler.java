@@ -1,6 +1,6 @@
 package edu.goit.telegrambot.currencubot;
 
-import edu.goit.telegrambot.Main;
+import edu.goit.telegrambot.AppLauncher;
 import edu.goit.telegrambot.bank.Banks;
 import edu.goit.telegrambot.cbuser.CBUser;
 import edu.goit.telegrambot.constants.Constants;
@@ -34,15 +34,15 @@ public class ResponseHandler {
     }
 
     public void replyToButtons(User user, long chatId, String buttonName) {
-        if (Main.cbUsers.containsKey(user.getId())) {
-            Main.cbUsers.get(user.getId()).setChatID(chatId);
+        if (AppLauncher.cbUsers.containsKey(user.getId())) {
+            AppLauncher.cbUsers.get(user.getId()).setChatID(chatId);
         } else {
-            Main.cbUsers.put(user.getId(), new CBUser(user.getId(), chatId));
+            AppLauncher.cbUsers.put(user.getId(), new CBUser(chatId));
         }
 
         switch (buttonName) {
             case Constants.GET_INFO_CB:
-                replyToGetInfo(Main.cbUsers.get(user.getId()).getMessage(), chatId);
+                replyToGetInfo(AppLauncher.cbUsers.get(user.getId()).getMessage(), chatId);
                 break;
             case Constants.SETUP_USER_CB:
                 replyToSetupUser(chatId);
@@ -60,19 +60,19 @@ public class ResponseHandler {
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TWO_CB:
-                Main.cbUsers.get(user.getId()).setTolerance((byte) 2);
+                AppLauncher.cbUsers.get(user.getId()).setTolerance((byte) 2);
                 replyToSetupTolerance(user, chatId);
                 break;
             case Constants.SET_THREE_CB:
-                Main.cbUsers.get(user.getId()).setTolerance((byte) 3);
+                AppLauncher.cbUsers.get(user.getId()).setTolerance((byte) 3);
                 replyToSetupTolerance(user, chatId);
                 break;
             case Constants.SET_FOUR_CB:
-                Main.cbUsers.get(user.getId()).setTolerance((byte) 4);
+                AppLauncher.cbUsers.get(user.getId()).setTolerance((byte) 4);
                 replyToSetupTolerance(user, chatId);
                 break;
             case Constants.SET_BANK_MONO_CB:
-                List<Banks> banks = Main.cbUsers.get(user.getId()).getBanks();
+                List<Banks> banks = AppLauncher.cbUsers.get(user.getId()).getBanks();
                 if (banks.contains(Banks.MONOBANK)) {
                     banks.remove(Banks.MONOBANK);
                 } else {
@@ -81,7 +81,7 @@ public class ResponseHandler {
                 replyToSetupBank(user, chatId);
                 break;
             case Constants.SET_BANK_PRIVAT_CB:
-                banks = Main.cbUsers.get(user.getId()).getBanks();
+                banks = AppLauncher.cbUsers.get(user.getId()).getBanks();
                 if (banks.contains(Banks.PRIVATBANK)) {
                     banks.remove(Banks.PRIVATBANK);
                 } else {
@@ -90,7 +90,7 @@ public class ResponseHandler {
                 replyToSetupBank(user, chatId);
                 break;
             case Constants.SET_BANK_NBU_CB:
-                banks = Main.cbUsers.get(user.getId()).getBanks();
+                banks = AppLauncher.cbUsers.get(user.getId()).getBanks();
                 if (banks.contains(Banks.NBUBANK)) {
                     banks.remove(Banks.NBUBANK);
                 } else {
@@ -99,7 +99,7 @@ public class ResponseHandler {
                 replyToSetupBank(user, chatId);
                 break;
             case Constants.SET_CURRENCY_USD_CB:
-                List<CurrencyType> currencyTypes = Main.cbUsers.get(user.getId()).getCurType();
+                List<CurrencyType> currencyTypes = AppLauncher.cbUsers.get(user.getId()).getCurType();
                 if (currencyTypes.contains(CurrencyType.USD)) {
                     currencyTypes.remove(CurrencyType.USD);
                 } else {
@@ -108,7 +108,7 @@ public class ResponseHandler {
                 replyToSetupCurrency(user, chatId);
                 break;
             case Constants.SET_CURRENCY_EUR_CB:
-                currencyTypes = Main.cbUsers.get(user.getId()).getCurType();
+                currencyTypes = AppLauncher.cbUsers.get(user.getId()).getCurType();
                 if (currencyTypes.contains(CurrencyType.EUR)) {
                     currencyTypes.remove(CurrencyType.EUR);
                 } else {
@@ -117,47 +117,47 @@ public class ResponseHandler {
                 replyToSetupCurrency(user, chatId);
                 break;
             case Constants.SET_TIME_9_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 9);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 9);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_10_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 10);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 10);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_11_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 11);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 11);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_12_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 12);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 12);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_13_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 13);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 13);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_14_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 14);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 14);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_15_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 15);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 15);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_16_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 16);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 16);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_17_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 17);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 17);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_18_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) 18);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) 18);
                 replyToSetupTime(user, chatId);
                 break;
             case Constants.SET_TIME_STOP_CB:
-                Main.cbUsers.get(user.getId()).setSendTime((byte) -1);
+                AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) -1);
                 replyToSetupTime(user, chatId);
                 break;
         }
@@ -192,7 +192,7 @@ public class ResponseHandler {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(Constants.TIME_SETUP_MESSAGE);
             sendMessage.setChatId(chatId);
-            sendMessage.setReplyMarkup(KeyboardFactory.setupTime(Main.cbUsers.get(user.getId())));
+            sendMessage.setReplyMarkup(KeyboardFactory.setupTime(AppLauncher.cbUsers.get(user.getId())));
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
@@ -204,7 +204,7 @@ public class ResponseHandler {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(Constants.CURRENCY_SETUP_MESSAGE);
             sendMessage.setChatId(chatId);
-            sendMessage.setReplyMarkup(KeyboardFactory.setupCurrency(Main.cbUsers.get(user.getId())));
+            sendMessage.setReplyMarkup(KeyboardFactory.setupCurrency(AppLauncher.cbUsers.get(user.getId())));
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
@@ -216,7 +216,7 @@ public class ResponseHandler {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(Constants.TOLERANCE_SETUP_MESSAGE);
             sendMessage.setChatId(chatId);
-            sendMessage.setReplyMarkup(KeyboardFactory.setupTolerance(Main.cbUsers.get(user.getId())));
+            sendMessage.setReplyMarkup(KeyboardFactory.setupTolerance(AppLauncher.cbUsers.get(user.getId())));
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
@@ -228,7 +228,7 @@ public class ResponseHandler {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(Constants.BANK_SETUP_MESSAGE);
             sendMessage.setChatId(chatId);
-            sendMessage.setReplyMarkup(KeyboardFactory.setupBank(Main.cbUsers.get(user.getId())));
+            sendMessage.setReplyMarkup(KeyboardFactory.setupBank(AppLauncher.cbUsers.get(user.getId())));
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();

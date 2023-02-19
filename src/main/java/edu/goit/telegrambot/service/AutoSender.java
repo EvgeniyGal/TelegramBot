@@ -1,6 +1,6 @@
 package edu.goit.telegrambot.service;
 
-import edu.goit.telegrambot.Main;
+import edu.goit.telegrambot.AppLauncher;
 import edu.goit.telegrambot.cbuser.CBUser;
 import edu.goit.telegrambot.currencubot.CurrencyBot;
 
@@ -39,7 +39,7 @@ public class AutoSender {
         }
 
         private void sendMessage(int currentHour) {
-            for (Map.Entry<Long, CBUser> entry : Main.cbUsers.entrySet()) {
+            for (Map.Entry<Long, CBUser> entry : AppLauncher.cbUsers.entrySet()) {
                 if (entry.getValue().getSendTime() == currentHour) {
                     CurrencyBot.getResponseHandler().replyToGetInfo(entry.getValue().getMessage(),
                             entry.getValue().getChatID());

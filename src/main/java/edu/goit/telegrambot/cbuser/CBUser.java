@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CBUser {
-    private final long id;
     private long chatID;
-    private List<Banks> banks;
+    private final List<Banks> banks;
     private byte tolerance;
-    private List<CurrencyType> curType;
+    private final List<CurrencyType> curType;
     private byte sendTime;
 
-    public CBUser(long id, long chatID) {
-        this.id = id;
+    public CBUser(long chatID) {
         this.chatID = chatID;
         this.banks = new ArrayList<>();
         this.tolerance = 2;

@@ -7,11 +7,9 @@ import edu.goit.telegrambot.currency.CurrencyType;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NBUBank extends Bank {
 
@@ -53,7 +51,7 @@ public class NBUBank extends Bank {
 
     @Override
     public void updateRate() {
-        for (Currency cur: currencies) {
+        for (Currency cur : currencies) {
             cur.setBuyRate(updateCurrencyRate(cur.getType()));
             cur.setSellRate(updateCurrencyRate(cur.getType()));
         }
@@ -80,9 +78,9 @@ public class NBUBank extends Bank {
 
 
         float result = responseDtos.stream()
-                .filter(item ->item.getCc()!=null)
+                .filter(item -> item.getCc() != null)
                 .filter(item -> (item.getCc().equals(type)))
-                .map(item -> item.getRate())
+                .map(NbuItem::getRate)
                 .findFirst()
                 .orElseThrow();
         return new BigDecimal(result);
