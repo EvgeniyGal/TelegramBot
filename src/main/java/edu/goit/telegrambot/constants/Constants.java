@@ -39,6 +39,11 @@ public interface Constants {
     String TOLERANCE_SETUP_MESSAGE = "Виберіть кількість знаків після коми";
     String BANK_SETUP_MESSAGE = "Виберіть банки, що вас цікавлять";
     String SETUP_USER_MESSAGE = "Налаштування";
+    String SET_DONE_T = "Готово";
+    String SET_DONE_CB = "Done";
+    String SET_READY_T = "Готово";
+    String SET_READY_CB = "Ready";
+    String SET_ALL_DONE_MESSAGE = "Налаштування виконано";
     String USA_FLAG = "\uD83C\uDDFA\uD83C\uDDF8";
     String UA_FLAG = "\uD83C\uDDFA\uD83C\uDDE6";
     String EU_FLAG = "\uD83C\uDDEA\uD83C\uDDFA";
