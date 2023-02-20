@@ -167,6 +167,7 @@ public class ResponseHandler {
         try {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(message);
+            sendMessage.setReplyMarkup(KeyboardFactory.withInfoSetupButtons());
             sendMessage.setChatId(chatId);
             sender.execute(sendMessage);
         } catch (TelegramApiException e) {
