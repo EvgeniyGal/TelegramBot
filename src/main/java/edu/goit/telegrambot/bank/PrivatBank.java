@@ -23,6 +23,7 @@ public class PrivatBank extends Bank {
         this.currencies = new ArrayList<>();
         currencies.add(new Currency(CurrencyType.USD, BigDecimal.ZERO, BigDecimal.ZERO));
         currencies.add(new Currency(CurrencyType.EUR, BigDecimal.ZERO, BigDecimal.ZERO));
+        updateRate();
     }
 
     public static Bank getInstance(){
@@ -39,8 +40,8 @@ public class PrivatBank extends Bank {
     public void updateRate() {
         response = respBody();
         for (Currency cur : currencies) {
-            cur.setSellRate(updateSellRate(cur.getType()));
-            cur.setBuyRate(updateBuyRate(cur.getType()));
+            cur.setSellRate(updateSellRate());
+            cur.setBuyRate(updateBuyRate());
         }
     }
 
@@ -52,11 +53,11 @@ public class PrivatBank extends Bank {
                     .body()
                     .text();
         } catch (IOException e) {
-            return "Too many requests";
+            throw new RuntimeException(e);
         }
     }
 
-    private BigDecimal updateBuyRate(CurrencyType curType) {
+    private BigDecimal updateBuyRate() {
         List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatItem>>() {
         }.getType());
         double result = privatItemList.stream()
@@ -66,7 +67,7 @@ public class PrivatBank extends Bank {
         return new BigDecimal(result);
     }
 
-    private BigDecimal updateSellRate(CurrencyType curType) {
+    private BigDecimal updateSellRate() {
         List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatBank.PrivatItem>>() {
         }.getType());
         double result = privatItemList.stream()
@@ -76,7 +77,3 @@ public class PrivatBank extends Bank {
         return new BigDecimal(result);
     }
 }
-
-/*
-[{"ccy":"EUR","base_ccy":"UAH","buy":"41.00000","sale":"42.00000"},{"ccy":"USD","base_ccy":"UAH","buy":"39.15000","sale":"39.65000"}]
- */
