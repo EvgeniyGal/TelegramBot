@@ -33,6 +33,18 @@ public class ResponseHandler {
         }
     }
 
+    public void replyToSetupFinished(long chatId) {
+        try {
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setText(Constants.SET_ALL_DONE_MESSAGE);
+            sendMessage.setReplyMarkup(KeyboardFactory.withInfoSetupButtons());
+            sendMessage.setChatId(chatId);
+            sender.execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void replyToButtons(User user, long chatId, String buttonName) {
         if (AppLauncher.cbUsers.containsKey(user.getId())) {
             AppLauncher.cbUsers.get(user.getId()).setChatID(chatId);
@@ -159,6 +171,12 @@ public class ResponseHandler {
             case Constants.SET_TIME_STOP_CB:
                 AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) -1);
                 replyToSetupTime(user, chatId);
+                break;
+            case Constants.SET_DONE_CB:
+                replyToSetupUser(chatId);
+                break;
+            case Constants.SET_READY_CB:
+                replyToSetupFinished(chatId);
                 break;
         }
     }

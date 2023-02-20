@@ -35,6 +35,7 @@ public class KeyboardFactory {
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineFirst = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineThird = new ArrayList<>();
         InlineKeyboardButton setTolerance = new InlineKeyboardButton();
         setTolerance.setText(Constants.SET_TOLERANCE_T);
         setTolerance.setCallbackData(Constants.SET_TOLERANCE_CB);
@@ -47,12 +48,17 @@ public class KeyboardFactory {
         InlineKeyboardButton setTime = new InlineKeyboardButton();
         setTime.setText(Constants.SET_TIME_T);
         setTime.setCallbackData(Constants.SET_TIME_CB);
+        InlineKeyboardButton setReady = new InlineKeyboardButton();
+        setReady.setText(Constants.SET_READY_T);
+        setReady.setCallbackData(Constants.SET_READY_CB);
         rowInlineFirst.add(setTolerance);
         rowInlineFirst.add(setBank);
         rowInlineSecond.add(setCurrency);
         rowInlineSecond.add(setTime);
+        rowInlineThird.add(setReady);
         rowsInline.add(rowInlineFirst);
         rowsInline.add(rowInlineSecond);
+        rowsInline.add(rowInlineThird);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
@@ -63,6 +69,7 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> rowInlineFirst = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineThird = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineFourth = new ArrayList<>();
         InlineKeyboardButton setTwo = new InlineKeyboardButton();
         setTwo.setText(cbUser.getTolerance() == 2 ? Constants.CHECK_SIGN + "2" : "2");
         setTwo.setCallbackData(Constants.SET_TWO_CB);
@@ -72,12 +79,17 @@ public class KeyboardFactory {
         InlineKeyboardButton setFour = new InlineKeyboardButton();
         setFour.setText(cbUser.getTolerance() == 4 ? Constants.CHECK_SIGN + "4" : "4");
         setFour.setCallbackData(Constants.SET_FOUR_CB);
+        InlineKeyboardButton setDone = new InlineKeyboardButton();
+        setDone.setText(Constants.SET_DONE_T);
+        setDone.setCallbackData(Constants.SET_DONE_CB);
         rowInlineFirst.add(setTwo);
         rowInlineSecond.add(setThree);
         rowInlineThird.add(setFour);
+        rowInlineFourth.add(setDone);
         rowsInline.add(rowInlineFirst);
         rowsInline.add(rowInlineSecond);
         rowsInline.add(rowInlineThird);
+        rowsInline.add(rowInlineFourth);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
@@ -91,6 +103,7 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> rowInlineFirst = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineThird = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineFourth = new ArrayList<>();
         InlineKeyboardButton setMono = new InlineKeyboardButton();
         setMono.setText(cbUser.getBanks().contains(Banks.MONOBANK) ? Constants.CHECK_SIGN + "Монобанк" : "Монобанк");
         setMono.setCallbackData(Constants.SET_BANK_MONO_CB);
@@ -100,12 +113,17 @@ public class KeyboardFactory {
         InlineKeyboardButton setNBU = new InlineKeyboardButton();
         setNBU.setText(cbUser.getBanks().contains(Banks.NBUBANK) ? Constants.CHECK_SIGN + "НБУ" : "НБУ");
         setNBU.setCallbackData(Constants.SET_BANK_NBU_CB);
+        InlineKeyboardButton setDone = new InlineKeyboardButton();
+        setDone.setText(Constants.SET_DONE_T);
+        setDone.setCallbackData(Constants.SET_DONE_CB);
         rowInlineFirst.add(setMono);
         rowInlineSecond.add(setPrivat);
         rowInlineThird.add(setNBU);
+        rowInlineFourth.add(setDone);
         rowsInline.add(rowInlineFirst);
         rowsInline.add(rowInlineSecond);
         rowsInline.add(rowInlineThird);
+        rowsInline.add(rowInlineFourth);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
@@ -113,16 +131,22 @@ public class KeyboardFactory {
     public static ReplyKeyboard setupCurrency(CBUser cbUser) {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineFirst = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
         InlineKeyboardButton setUSD = new InlineKeyboardButton();
         setUSD.setText(cbUser.getCurType().contains(CurrencyType.USD) ? Constants.CHECK_SIGN + "USD" : "USD");
         setUSD.setCallbackData(Constants.SET_CURRENCY_USD_CB);
         InlineKeyboardButton setEUR = new InlineKeyboardButton();
         setEUR.setText(cbUser.getCurType().contains(CurrencyType.EUR) ? Constants.CHECK_SIGN + "EUR" : "EUR");
         setEUR.setCallbackData(Constants.SET_CURRENCY_EUR_CB);
-        rowInline.add(setUSD);
-        rowInline.add(setEUR);
-        rowsInline.add(rowInline);
+        InlineKeyboardButton setDone = new InlineKeyboardButton();
+        setDone.setText(Constants.SET_DONE_T);
+        setDone.setCallbackData(Constants.SET_DONE_CB);
+        rowInlineFirst.add(setUSD);
+        rowInlineFirst.add(setEUR);
+        rowInlineSecond.add(setDone);
+        rowsInline.add(rowInlineFirst);
+        rowsInline.add(rowInlineSecond);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
@@ -134,6 +158,7 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> rowInlineSecond = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineThird = new ArrayList<>();
         List<InlineKeyboardButton> rowInlineFourth = new ArrayList<>();
+        List<InlineKeyboardButton> rowInlineFifth = new ArrayList<>();
         InlineKeyboardButton set9 = new InlineKeyboardButton();
         set9.setText(cbUser.getSendTime() == 9 ? Constants.CHECK_SIGN + "9" : "9");
         set9.setCallbackData(Constants.SET_TIME_9_CB);
@@ -167,6 +192,9 @@ public class KeyboardFactory {
         InlineKeyboardButton setStop = new InlineKeyboardButton();
         setStop.setText(cbUser.getSendTime() == -1 ? Constants.CHECK_SIGN + "Відключити сповіщення" : "Відключити сповіщення");
         setStop.setCallbackData(Constants.SET_TIME_STOP_CB);
+        InlineKeyboardButton setDone = new InlineKeyboardButton();
+        setDone.setText(Constants.SET_DONE_T);
+        setDone.setCallbackData(Constants.SET_DONE_CB);
 
         rowInlineFirst.add(set9);
         rowInlineFirst.add(set10);
@@ -183,10 +211,13 @@ public class KeyboardFactory {
         rowInlineFourth.add(set18);
         rowInlineFourth.add(setStop);
 
+        rowInlineFifth.add(setDone);
+
         rowsInline.add(rowInlineFirst);
         rowsInline.add(rowInlineSecond);
         rowsInline.add(rowInlineThird);
         rowsInline.add(rowInlineFourth);
+        rowsInline.add(rowInlineFifth);
 
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
