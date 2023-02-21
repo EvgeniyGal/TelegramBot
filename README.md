@@ -1,21 +1,23 @@
-CurrencyBot
+# **CurrencyBot**
 
-A simple to use app to be up-to-date with currency rates of Ukrainian banks.
+## A simple to use app to be up-to-date with currency rates of Ukrainian banks.
 
-How to Run app.
+## **How to Run app.**
 
-1. Create interface BotConfig in package edu.goit.telegrambot.constants with the data that shows next:
+#### 1 Create interface BotConfig in package edu.goit.telegrambot.constants with the data that shows next:
 
-package edu.goit.telegrambot.constants;
+#### ackage edu.goit.telegrambot.constants;
 
-public interface BotConfig {
 
-    String BOT_USERNAME = "Yout bot name";
+#### public interface BotConfig {
 
-    String BOT_TOKEN = "Your bot tocken";
+####    String BOT_USERNAME = "Yout bot name";
 
-    int CREATOR_ID = Your bot ID;
+####    String BOT_TOKEN = "Your bot tocken";
 
-}
+####    int CREATOR_ID = Your bot ID;
 
-2. Run the AppLauncher.
+#### 
+
+
+#### 2 Run the AppLauncher.
