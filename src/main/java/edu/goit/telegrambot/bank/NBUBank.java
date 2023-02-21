@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import edu.goit.telegrambot.currency.Currency;
 import edu.goit.telegrambot.currency.CurrencyType;
+import lombok.Data;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
@@ -27,25 +28,10 @@ public class NBUBank extends Bank {
         return nbuBank;
     }
 
+    @Data
     static class NbuItem {
         private float rate;
         private CurrencyType cc;
-
-        public float getRate() {
-            return rate;
-        }
-
-        public void setRate(float rate) {
-            this.rate = rate;
-        }
-
-        public CurrencyType getCc() {
-            return cc;
-        }
-
-        public void setCc(CurrencyType cc) {
-            this.cc = cc;
-        }
     }
 
 
@@ -61,7 +47,7 @@ public class NBUBank extends Bank {
     public BigDecimal updateCurrencyRate(CurrencyType type) {
         String api = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
         Gson gson = new Gson();
-        String responce = "";
+        String responce;
         try {
             responce = Jsoup
                     .connect(api)

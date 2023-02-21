@@ -26,16 +26,14 @@ public class AutoSender {
     private static class SendTask implements Runnable {
 
         public void run() {
-
             Date currentDate = new Date();
             Calendar currentTime = Calendar.getInstance();
             currentTime.setTime(currentDate);
-            int currentHour = currentTime.get(Calendar.HOUR);
+            int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
 
             if (currentHour >= 9 && currentHour <= 18) {
                 sendMessage(currentHour);
             }
-
         }
 
         private void sendMessage(int currentHour) {

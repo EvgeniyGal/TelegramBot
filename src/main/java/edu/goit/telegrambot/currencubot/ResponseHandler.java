@@ -57,6 +57,7 @@ public class ResponseHandler {
                 replyToGetInfo(AppLauncher.cbUsers.get(user.getId()).getMessage(), chatId);
                 break;
             case Constants.SETUP_USER_CB:
+            case Constants.SET_DONE_CB:
                 replyToSetupUser(chatId);
                 break;
             case Constants.SET_BANK_CB:
@@ -171,9 +172,6 @@ public class ResponseHandler {
             case Constants.SET_TIME_STOP_CB:
                 AppLauncher.cbUsers.get(user.getId()).setSendTime((byte) -1);
                 replyToSetupTime(user, chatId);
-                break;
-            case Constants.SET_DONE_CB:
-                replyToSetupUser(chatId);
                 break;
             case Constants.SET_READY_CB:
                 replyToSetupFinished(chatId);

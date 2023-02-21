@@ -4,15 +4,18 @@ import edu.goit.telegrambot.currency.Currency;
 import edu.goit.telegrambot.currency.CurrencyType;
 
 import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
+
 import java.io.IOException;
 import java.util.List;
 
-public class PrivatBank extends Bank{
+public class PrivatBank extends Bank {
 
     private static final String URL = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5";
     private static final PrivatBank privatBank = new PrivatBank();
@@ -26,7 +29,7 @@ public class PrivatBank extends Bank{
         updateRate();
     }
 
-    public static Bank getInstance(){
+    public static Bank getInstance() {
         return privatBank;
     }
 
@@ -58,22 +61,30 @@ public class PrivatBank extends Bank{
     }
 
     private BigDecimal updateBuyRate() {
-        List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatItem>>() {
-        }.getType());
-        double result = privatItemList.stream()
-                .map(PrivatItem::getBuy)
-                .findFirst()
-                .orElseThrow();
-        return new BigDecimal(result);
+        if (response == null) {
+            return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
+        } else {
+            List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatItem>>() {
+            }.getType());
+            double result = privatItemList.stream()
+                    .map(PrivatItem::getBuy)
+                    .findFirst()
+                    .orElseThrow();
+            return new BigDecimal(result);
+        }
     }
 
     private BigDecimal updateSellRate() {
-        List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatBank.PrivatItem>>() {
-        }.getType());
-        double result = privatItemList.stream()
-                .map(PrivatItem::getSale)
-                .findFirst()
-                .orElseThrow();
-        return new BigDecimal(result);
+        if (response == null) {
+            return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
+        } else {
+            List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatBank.PrivatItem>>() {
+            }.getType());
+            double result = privatItemList.stream()
+                    .map(PrivatItem::getSale)
+                    .findFirst()
+                    .orElseThrow();
+            return new BigDecimal(result);
+        }
     }
 }
