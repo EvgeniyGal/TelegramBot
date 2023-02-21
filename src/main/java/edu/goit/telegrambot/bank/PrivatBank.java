@@ -35,7 +35,7 @@ public class PrivatBank extends Bank {
 
     @Data
     static class PrivatItem {
-        private String EUR, USD;
+        private String ccy, base_ccy;
         private double buy, sale;
     }
 
@@ -43,8 +43,8 @@ public class PrivatBank extends Bank {
     public void updateRate() {
         response = respBody();
         for (Currency cur : currencies) {
-            cur.setSellRate(updateSellRate());
-            cur.setBuyRate(updateBuyRate());
+            cur.setSellRate(updateSellRate(cur.getType()));
+            cur.setBuyRate(updateBuyRate(cur.getType()));
         }
     }
 
@@ -56,17 +56,19 @@ public class PrivatBank extends Bank {
                     .body()
                     .text();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    private BigDecimal updateBuyRate() {
+    private BigDecimal updateBuyRate(CurrencyType currenType) {
         if (response == null) {
             return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
         } else {
             List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatItem>>() {
             }.getType());
             double result = privatItemList.stream()
+                    .filter(item -> item.ccy.equals(currenType.name()))
                     .map(PrivatItem::getBuy)
                     .findFirst()
                     .orElseThrow();
@@ -74,13 +76,14 @@ public class PrivatBank extends Bank {
         }
     }
 
-    private BigDecimal updateSellRate() {
+    private BigDecimal updateSellRate(CurrencyType currenType) {
         if (response == null) {
             return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
         } else {
             List<PrivatItem> privatItemList = new Gson().fromJson(response, new TypeToken<List<PrivatBank.PrivatItem>>() {
             }.getType());
             double result = privatItemList.stream()
+                    .filter(item -> item.ccy.equals(currenType.name()))
                     .map(PrivatItem::getSale)
                     .findFirst()
                     .orElseThrow();

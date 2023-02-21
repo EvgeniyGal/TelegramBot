@@ -38,13 +38,13 @@ public class NBUBank extends Bank {
     @Override
     public void updateRate() {
         for (Currency cur : currencies) {
-            cur.setBuyRate(updateCurrencyRate(cur.getType()));
-            cur.setSellRate(updateCurrencyRate(cur.getType()));
+            cur.setBuyRate(updateCurrencyRate(cur.getType(), "buy"));
+            cur.setSellRate(updateCurrencyRate(cur.getType(), "sell"));
         }
     }
 
 
-    public BigDecimal updateCurrencyRate(CurrencyType type) {
+    public BigDecimal updateCurrencyRate(CurrencyType type, String operation) {
         String api = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
         Gson gson = new Gson();
         String responce;
@@ -55,13 +55,17 @@ public class NBUBank extends Bank {
                     .get()
                     .body()
                     .text();
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            if (operation.equals("buy")) {
+                return currencies.stream().map(Currency::getBuyRate).findFirst().orElseThrow();
+            } else {
+                return currencies.stream().map(Currency::getSellRate).findFirst().orElseThrow();
+            }
         }
 
         List<NbuItem> responseDtos = gson.fromJson(responce, new TypeToken<List<NbuItem>>() {
         }.getType());
-
 
         float result = responseDtos.stream()
                 .filter(item -> item.getCc() != null)
